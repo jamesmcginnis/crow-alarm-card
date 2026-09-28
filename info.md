@@ -50,103 +50,9 @@ Each feature has its own toggle in the editor. The assistant only sees this alar
 
 ---
 
-## 🚀 Installation
+## Configuration
 
-### Via HACS (Recommended)
-
-Click the button below to add this repository to HACS:
-
-[![Add to HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jamesmcginnis&repository=crow-alarm-card&category=plugin)
-
-Then:
-
-1. Open **HACS** in Home Assistant
-2. Go to **Frontend**
-3. Search for **Crow Alarm Card**
-4. Click **Download**
-5. Reload your browser
-
-### Manual Installation
-
-1. Download `crow-alarm-card.js` from the [latest release](https://github.com/jamesmcginnis/crow-alarm-card/releases/latest)
-2. Copy it to `/config/www/crow-alarm-card.js`
-3. In Home Assistant go to **Settings → Dashboards → Resources**
-4. Add a new resource:
-   - URL: `/local/crow-alarm-card.js`
-   - Type: **JavaScript module**
-5. Reload your browser
-
----
-
-## 🛠️ Dashboard Card Configuration
-
-Add the card from the card picker (search for **Crow Alarm Card**). It picks your first alarm panel automatically. You can also choose **Manual** and use:
-
-```yaml
-type: custom:crow-alarm-card
-entity: alarm_control_panel.your_alarm
-```
-
-Everything else can be set in the built-in visual editor. Every option below also works in YAML.
-
-### Options
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `entity` | `string` | **required** | Your `alarm_control_panel` entity |
-| `name` | `string` | entity name | Custom display name |
-| `show_name` / `show_state` | `boolean` | `true` | Show the name and state lines |
-| `layout` | `dial` \| `pill` \| `tile` | `dial` | Card layout |
-| `modes` | `list` | `[arm_home, arm_away]` | Arm buttons to show: `arm_home`, `arm_away`, `arm_night`, `arm_vacation`, `arm_custom_bypass` (Off is always shown) |
-| `require_code_to_arm` | `boolean` | `false` | Show the PIN pad before arming |
-| `require_code_to_disarm` | `boolean` | `false` | Show the PIN pad before disarming |
-| `pin_style` | `rounded` \| `round` | `rounded` | PIN pad look: soft square keys, or circular keys with a round action button |
-| `code` | `string` | — | Code sent with every button press when the PIN pad isn't used (see [Security](#-security)) |
-| `appearance` | `auto` \| `light` \| `dark` | `auto` | Theme |
-| `glass` | `0–100` | `50` | Glass transparency, from clear to frosted |
-| `size` | `compact` \| `regular` | `compact` | Regular is about 20% larger |
-| `animation` | `off` \| `subtle` \| `system` | `subtle` | State animations |
-| `colors` | `map` | Classic | Hex colours for `disarmed`, `armed`, `pending`, `triggered` |
-| `ai_features_enabled` | `boolean` | `false` | Turns on the AI features |
-| `ai_conversation_agent` | `string` | — | HA conversation agent used for every AI feature |
-| `ai_enable_insight` / `ai_enable_ask` / `ai_enable_recap` / `ai_enable_week` | `boolean` | `true` | Individual AI features |
-
-### Example
-
-```yaml
-type: custom:crow-alarm-card
-entity: alarm_control_panel.home_alarm
-name: House Alarm
-layout: dial
-modes:
-  - arm_home
-  - arm_away
-  - arm_night
-require_code_to_disarm: true
-appearance: auto
-glass: 60
-size: regular
-animation: system
-colors:
-  disarmed: "#30D158"
-  armed: "#FF453A"
-  pending: "#FF9F0A"
-  triggered: "#FF3B30"
-ai_features_enabled: true
-ai_conversation_agent: conversation.google_ai_conversation
-```
-
----
-
-## 👆 Interactions
-
-| Gesture | Action |
-|---|---|
-| **Tap an arm button** | Arms in that mode, or opens the PIN pad first if a code is required to arm |
-| **Tap Off** | Disarms, or opens the PIN pad first if a code is required to disarm |
-| **Tap the alarm icon, tap the card away from the buttons, or long-press it** | Opens the AI actions sheet (only when AI is on) |
-| **Enter / Space on the focused card** | Opens the actions sheet (keyboard) |
-| **✕, tap outside, or Esc** | Closes the PIN pad or an AI sheet |
+Add the card from the card picker and it picks your first alarm panel automatically. Everything else is set in the built-in visual editor, so you don't need any YAML. The README has the full list of YAML options.
 
 ---
 
@@ -200,9 +106,3 @@ Works with any integration that provides an `alarm_control_panel` entity, includ
 ### Supported States
 
 `disarmed` · `armed_home` · `armed_away` · `armed_night` · `armed_vacation` · `armed_custom_bypass` · `pending` · `arming` · `disarming` · `triggered`
-
----
-
-## 📄 License
-
-MIT License — free to use, modify, and distribute.
